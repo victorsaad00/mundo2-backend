@@ -2,6 +2,21 @@ var app = require("../app");
 var debug = require("debug")("mundo2-backend:server");
 var http = require("http");
 
+const mongoose = require("mongoose");
+const password = "travellerscodemundo2";
+const dbname = "Cluster0";
+
+mongoose.connect(
+  `mongodb+srv://travellerscodemundo2:${password}@cluster0.i7ol4.mongodb.net/${dbname}?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
+
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
