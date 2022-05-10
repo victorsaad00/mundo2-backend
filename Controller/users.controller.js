@@ -4,7 +4,24 @@ const userModel = require("../Models/user.model");
 const userController = {
   login: async (req, res) => {
     try {
-      return res.status(200).json("login");
+      const userCredentials = new userModel(req.body);
+
+      const findUser = await userModel.findOne({
+        email: userCredentials.email,
+      }); // pega do banco
+
+      if (findUser) {
+        if (
+          userCredentials.email === findUser.email &&
+          userCredentials.password === findUser.password
+        ) {
+          return res.status(200).json("Login efeuado com sucesso!");
+        } else {
+          return res.status(400).json("Email ou senha incorretos!");
+        }
+      } else {
+        return res.status(404).json("Usuario não encontrado!");
+      }
     } catch (error) {
       console.log(error);
       return res.json({ error: error });
@@ -12,20 +29,38 @@ const userController = {
   },
 
   register: async (req, res) => {
-    const user = new userModel(req.body);
     try {
-      await user.save();
+      const user = new userModel(req.body);
 
-      return res.status(200).send(user);
+      const findUser = await userModel.findOne({
+        email: email,
+      });
+
+      if (!findUser) {
+        await user.save();
+        return res.status(200).send("Usuario cadastrado com sucesso!");
+      } else {
+        return res.status(400).send("Usuário já cadastrado!");
+      }
     } catch (error) {
       console.log(error);
       return res.json({ error: error });
     }
   },
 
-  getUser: async (req, res) => {
+  updateUser: async (req, res) => {
     try {
-      return res.status(200).send("getUser");
+      const { email } = new userModel(req.body);
+      const findUser = await userModel.findOne({
+        email: email,
+      }); // pega do banco
+
+      if (findUser) {
+        await findUser.updateOne(req.body);
+        return res.status(200).send("Usuário atualizado com sucesso!");
+      } else {
+        return res.status(400).send("Usuário não encontrado!");
+      }
     } catch (error) {
       return res.json({ error: error });
     }
