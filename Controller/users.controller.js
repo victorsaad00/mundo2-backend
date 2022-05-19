@@ -33,7 +33,7 @@ const userController = {
       const user = new userModel(req.body);
 
       const findUser = await userModel.findOne({
-        email: email,
+        email: user.email,
       });
 
       if (!findUser) {

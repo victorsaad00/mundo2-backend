@@ -31,9 +31,16 @@ const UserSchema = new mongoose.Schema({
     skins: {
       head: [String],
       armor: [String],
-      legs: [String],
-      weapon: [String],
+      feet: [String],
     },
+  },
+  usedItems: {
+    head: String,
+    armor: String,
+    eyeColor: String,
+    feet: String,
+    hairColor: String,
+    skinColor: String,
   },
 });
 
