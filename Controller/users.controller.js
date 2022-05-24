@@ -15,7 +15,7 @@ const userController = {
           userCredentials.email === findUser.email &&
           userCredentials.password === findUser.password
         ) {
-          return res.status(200).json("Login efeuado com sucesso!");
+          return res.status(200).json("Usuario logado com sucesso!");
         } else {
           return res.status(400).json("Email ou senha incorretos!");
         }
