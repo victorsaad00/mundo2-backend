@@ -17,7 +17,7 @@ const userController = {
         ) {
           return res.status(200).json("Usuario logado com sucesso!");
         } else {
-          return res.status(400).json("Email ou senha incorretos!");
+          return res.status(203).json("Email ou senha incorretos!");
         }
       } else {
         return res.status(404).json("Usuario não encontrado!");
