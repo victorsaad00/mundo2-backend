@@ -15,7 +15,7 @@ const userController = {
           userCredentials.email === findUser.email &&
           userCredentials.password === findUser.password
         ) {
-          return res.status(200).json("Usuario logado com sucesso!");
+          return res.status(200).json(findUser);
         } else {
           return res.status(203).json("Email ou senha incorretos!");
         }
@@ -57,7 +57,7 @@ const userController = {
 
       if (findUser) {
         await findUser.updateOne(req.body);
-        return res.status(200).send("Usuário atualizado com sucesso!");
+        return res.status(200).send(JSON.stringify(findUser));
       } else {
         return res.status(400).send("Usuário não encontrado!");
       }
