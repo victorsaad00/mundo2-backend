@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    defult: "",
+    default: "",
     required: true,
   },
   fase: {
@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
+  experience: {
+    type: Number,
+    default: 0,
+  },
   items: {
     cash: {
       type: Number,
@@ -31,14 +35,16 @@ const UserSchema = new mongoose.Schema({
     skins: {
       head: [String],
       armor: [String],
-      feet: [String],
+      shoes: [String],
+      weapon: [String]
     },
   },
   usedItems: {
     head: String,
+    genre: String,
     armor: String,
     eyeColor: String,
-    feet: String,
+    shoes: String,
     hairColor: String,
     skinColor: String,
   },
